@@ -19,12 +19,40 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             e.ToTable("People");
             e.HasKey(p => p.Id);
             e.HasIndex(p => p.Cpf).IsUnique();
-            e.Property(p => p.Name).IsRequired();
+
+            e.Property(p => p.Name)
+             .IsRequired()
+             .HasMaxLength(200);
+
             e.Property(p => p.Cpf)
              .IsRequired()
              .HasMaxLength(11);
-            e.Property(p => p.BirthDate).IsRequired();
-            e.Property(p => p.Address).IsRequired(false);
+
+            e.Property(p => p.BirthDate)
+             .IsRequired();
+
+            e.Property(p => p.Gender)
+             .HasConversion<string>()
+             .HasMaxLength(20)
+             .IsRequired(false);
+
+            e.Property(p => p.BirthPlace)
+             .HasMaxLength(100)
+             .IsRequired(false);
+
+            e.Property(p => p.Nationality)
+             .HasMaxLength(100)
+             .IsRequired(false);
+
+            e.Property(p => p.Address)
+             .HasMaxLength(300)
+             .IsRequired(false);
+
+            e.Property(p => p.CreatedAt)
+             .IsRequired();
+
+            e.Property(p => p.UpdatedAt)
+             .IsRequired();
         });
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Net.Mail;
+using Microsoft.AspNetCore.Identity;
 using PeopleRegistration.Domain.Enum;
 
 namespace PeopleRegistration.Domain.Entities;
@@ -56,7 +57,7 @@ public class Person : IdentityUser<Guid>
     {
         if (email != null)
         {
-            var addr = new System.Net.Mail.MailAddress(email.Trim());
+            var addr = new MailAddress(email.Trim());
             Email = addr.Address;
             UserName = addr.Address;
         }
@@ -71,9 +72,35 @@ public class Person : IdentityUser<Guid>
 
     private void SetCpf(string cpf)
     {
-        if (string.IsNullOrWhiteSpace(cpf) || cpf.Length != 11 || !ulong.TryParse(cpf, out _))
-            throw new ArgumentException("CPF must consist of 11 numeric digits.", nameof(cpf));
-        Cpf = cpf;
+        if (string.IsNullOrWhiteSpace(cpf))
+            throw new ArgumentException("CPF is required.", nameof(cpf));
+
+        var digits = new string(cpf.Where(char.IsDigit).ToArray());
+        if (digits.Length != 11)
+            throw new ArgumentException("CPF must consist of 11 digits.", nameof(cpf));
+
+        if (!IsValidCpf(digits))
+            throw new ArgumentException("CPF format is invalid.", nameof(cpf));
+
+        Cpf = digits;
+    }
+
+    private static bool IsValidCpf(string cpf)
+    {
+        if (cpf.Distinct().Count() == 1) return false;
+
+        int[] numbers = cpf.Select(c => c - '0').ToArray();
+        for (int j = 9; j < 11; j++)
+        {
+            int sum = 0;
+            for (int i = 0; i < j; i++)
+                sum += numbers[i] * (j + 1 - i);
+
+            int rest = (sum * 10) % 11;
+            if (rest == 10) rest = 0;
+            if (numbers[j] != rest) return false;
+        }
+        return true;
     }
 
     public void SetAddress(string address)

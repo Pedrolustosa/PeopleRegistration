@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using PeopleRegistration.Application.DTOs;
 using PeopleRegistration.Application.Interfaces;
 
-namespace PeopleRegistration.API.Controllers;
+namespace PeopleRegistration.API.Controllers.Auth;
 
 [ApiController]
 [Route("api/[controller]")]

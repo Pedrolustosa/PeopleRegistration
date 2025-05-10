@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using PeopleRegistration.Infrastructure.Data;
 using PeopleRegistration.Infrastructure.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 
 var app = builder.Build();
-
+await app.Services.GetRequiredService<IServiceProvider>().SeedAsync();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();

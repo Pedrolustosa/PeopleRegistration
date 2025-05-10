@@ -4,10 +4,9 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace PeopleRegistration.Infrastructure.Swagger;
+namespace PeopleRegistration.Infrastructure.IoC;
 
-public class ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider)
-        : IConfigureOptions<SwaggerGenOptions>
+public class ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) : IConfigureOptions<SwaggerGenOptions>
 {
     private readonly IApiVersionDescriptionProvider _provider = provider;
 
@@ -19,8 +18,9 @@ public class ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider)
                 desc.GroupName,
                 new OpenApiInfo
                 {
-                    Title   = $"People API {desc.ApiVersion}",
-                    Version = desc.ApiVersion.ToString()
+                    Title       = "People Registration API",
+                    Version     = desc.ApiVersion.ToString(),
+                    Description = "API for managing people registrations"
                 });
         }
     }

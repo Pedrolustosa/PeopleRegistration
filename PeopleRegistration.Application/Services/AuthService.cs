@@ -28,7 +28,7 @@ public class AuthService(IAuthRepository repo, IConfiguration config) : IAuthSer
 
     public async Task<TokenResult?> LoginAsync(LoginDto dto)
     {
-        var user = await _repo.FindByNameAsync(dto.Username);
+        var user = await _repo.FindByNameAsync(dto.Email);
         if (user is null) return null;
 
         var signin = await _repo.CheckPasswordSignInAsync(user, dto.Password);

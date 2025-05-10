@@ -3,11 +3,11 @@
 namespace PeopleRegistration.Application.DTOs;
 
 public record CreatePersonDto(
-    string Name,
-    Gender? Gender,
-    string? Email,
-    DateTime BirthDate,
-    string? BirthPlace,
-    string? Nationality,
-    string Cpf
-);
+        string Name,
+        Gender? Gender,
+        string? Email,
+        DateTime BirthDate,
+        string? BirthPlace,
+        string? Nationality,
+        string Cpf
+    );

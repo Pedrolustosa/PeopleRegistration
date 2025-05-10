@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using PeopleRegistration.Application.DTOs;
 using PeopleRegistration.Application.Interfaces;
 
-namespace PeopleRegistration.API.Controllers.v2;
+namespace PeopleRegistration.API.Controllers.People.v2;
 
 [ApiController]
 [ApiVersion("2.0")]

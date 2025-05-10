@@ -23,4 +23,8 @@
     <ProjectReference Include="..\PeopleRegistration.Domain\PeopleRegistration.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Swagger\" />
+  </ItemGroup>
+
 </Project>
