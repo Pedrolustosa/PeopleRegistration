@@ -43,7 +43,6 @@ class PersonService {
       
       throw new Error(response.data.message || 'Pessoa não encontrada');
     } catch (error) {
-      console.error(`Error getting person with ID ${id}:`, error);
       if (error.response?.data?.message) {
         throw new Error(error.response.data.message);
       }
@@ -76,7 +75,6 @@ class PersonService {
     try {
       const useV2 = this.hasAddress(personData);
       const url = useV2 ? this.baseUrlV2 : this.baseUrlV1;
-      console.log(`Usando API ${useV2 ? 'v2' : 'v1'} para atualizar pessoa`);
       
       const response = await api.put(`${url}/${id}`, personData);
       
@@ -87,7 +85,6 @@ class PersonService {
         errors: response.data.errors
       };
     } catch (error) {
-      console.error(`Error updating person with ID ${id}:`, error);
       if (error.response?.data) {
         throw error.response.data;
       }
@@ -105,7 +102,6 @@ class PersonService {
         errors: response.data.errors
       };
     } catch (error) {
-      console.error(`Error deleting person with ID ${id}:`, error);
       if (error.response?.data) {
         throw error.response.data;
       }

@@ -14,7 +14,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      console.log('Token recuperado ao iniciar:', token);
       setCurrentUser({ token });
     }
     setLoading(false);
@@ -24,7 +23,6 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await AuthService.login(email, password);
       if (response && response.token) {
-        console.log('Token recebido no login:', response.token);
         setCurrentUser({ token: response.token });
         await new Promise(resolve => setTimeout(resolve, 100));
         return {
@@ -34,7 +32,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false };
     } catch (error) {
-      console.error('Login error:', error);
       return {
         success: false,
         message: error.message || 'Falha na autenticação',
@@ -48,7 +45,6 @@ export const AuthProvider = ({ children }) => {
       const response = await AuthService.register(name, username, email, birthDate, cpf, password);
       return response;
     } catch (error) {
-      console.error('Register error:', error);
       return {
         success: false,
         message: error.message || 'Falha no registro',
@@ -58,7 +54,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    console.log('Realizando logout');
     AuthService.logout();
     setCurrentUser(null);
     navigate('/login');

@@ -9,12 +9,10 @@ class AuthService {
       });
       
       if (response.data && response.data.success && response.data.data) {
-        // Extraindo o token do objeto TokenResult dentro do campo data
         const tokenData = response.data.data;
         const tokenString = typeof tokenData === 'string' ? tokenData : JSON.stringify(tokenData);
         
         localStorage.setItem('token', tokenString);
-        console.log('Token armazenado:', tokenString);
         return {
           token: tokenString,
           message: response.data.message

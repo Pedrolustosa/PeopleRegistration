@@ -46,7 +46,6 @@ const Register = () => {
     let value = e.target.value.replace(/\D/g, '');
     
     if (value.length <= 11) {
-      // Formata o CPF (XXX.XXX.XXX-XX)
       value = value
         .replace(/(\d{3})(\d)/, '$1.$2')
         .replace(/(\d{3})(\d)/, '$1.$2')
@@ -80,7 +79,6 @@ const Register = () => {
       newErrors.birthDate = 'Data de nascimento é obrigatória';
     }
 
-    // Validação do CPF (formato básico)
     const cpfClean = formData.cpf.replace(/\D/g, '');
     if (!cpfClean || cpfClean.length !== 11) newErrors.cpf = 'CPF inválido';
 
@@ -131,12 +129,10 @@ const Register = () => {
         }, 2000);
       } else {
         if (response.errors && response.errors.length > 0) {
-          // Tentar mapear erros para campos específicos
           const fieldErrors = {};
           let hasFieldErrors = false;
           
           response.errors.forEach(error => {
-            // Exemplo de formato de erro: "O campo Email é obrigatório"
             const fieldMatch = error.match(/O campo ([\w]+) é/);
             if (fieldMatch && fieldMatch[1]) {
               const fieldName = fieldMatch[1].charAt(0).toLowerCase() + fieldMatch[1].slice(1);
@@ -155,7 +151,6 @@ const Register = () => {
         }
       }
     } catch (error) {
-      console.error('Registration error:', error);
       if (error.errors && error.errors.length > 0) {
         setServerError(error.errors.join('\n'));
       } else {

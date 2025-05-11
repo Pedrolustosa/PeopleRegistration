@@ -28,19 +28,17 @@ using (var scope = app.Services.CreateScope())
     await services.SeedAsync();
 }
 
-if (app.Environment.IsDevelopment())
+
+app.UseDeveloperExceptionPage();
+app.UseSwagger();
+var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+app.UseSwaggerUI(c =>
 {
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-    app.UseSwaggerUI(c =>
-    {
-        foreach (var desc in provider.ApiVersionDescriptions)
-            c.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json",
-                              desc.GroupName.ToUpperInvariant());
-        c.RoutePrefix = "swagger";
-    });
-}
+    foreach (var desc in provider.ApiVersionDescriptions)
+        c.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json",
+                            desc.GroupName.ToUpperInvariant());
+    c.RoutePrefix = "swagger";
+});
 
 app.UseRouting();
 app.UseCors("Default");

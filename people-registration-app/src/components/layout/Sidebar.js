@@ -10,12 +10,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../context/AuthContext';
 
-// Componente da barra lateral
 const Sidebar = ({ expanded, toggleSidebar }) => {
   const location = useLocation();
   const { logout } = useAuth();
   
-  // Função para verificar se o link está ativo
   const isActive = (path) => {
     return location.pathname === path || 
            (path !== '/' && location.pathname.startsWith(path));

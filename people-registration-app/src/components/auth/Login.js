@@ -55,7 +55,6 @@ const Login = () => {
       }
     } catch (error) {
       toast.error('Erro ao tentar fazer login. Tente novamente.');
-      console.error('Login error:', error);
     } finally {
       setLoading(false);
     }

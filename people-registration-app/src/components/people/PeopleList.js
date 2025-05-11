@@ -80,7 +80,6 @@ const PeopleList = () => {
 
   useEffect(() => {
     if (currentUser) {
-      console.log('Usuário autenticado, buscando pessoas...');
       fetchPeople(pagination.currentPage);
     }
     return () => {

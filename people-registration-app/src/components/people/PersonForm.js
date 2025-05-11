@@ -43,7 +43,6 @@ const PersonForm = () => {
   const [validated, setValidated] = useState(false);
   const [serverError, setServerError] = useState('');
 
-  // Buscar dados da pessoa para edição
   useEffect(() => {
     const fetchPerson = async () => {
       if (!id || !isEditMode) return;
@@ -52,7 +51,6 @@ const PersonForm = () => {
       try {
         const person = await PersonService.getById(id);
         if (person) {
-          // Formatar a data para o formato yyyy-MM-dd para o input date
           const birthDate = person.birthDate ? new Date(person.birthDate).toISOString().split('T')[0] : '';
           
           setFormData({
@@ -69,7 +67,6 @@ const PersonForm = () => {
           throw new Error('Pessoa não encontrada');
         }
       } catch (error) {
-        console.error('Error fetching person details:', error);
         toast.error(error.message || 'Erro ao carregar os dados da pessoa');
         setServerError('Não foi possível carregar os dados. Por favor, tente novamente.');
         navigate('/people');
@@ -81,7 +78,6 @@ const PersonForm = () => {
     fetchPerson();
   }, [id, isEditMode, navigate]);
 
-  // Manipulador para mudanças nos campos do formulário
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -90,12 +86,10 @@ const PersonForm = () => {
     }));
   };
 
-  // Função para formatar CPF enquanto digita
   const handleCpfChange = (e) => {
-    let value = e.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    let value = e.target.value.replace(/\D/g, '');
     
     if (value.length <= 11) {
-      // Formata o CPF (XXX.XXX.XXX-XX)
       value = value
         .replace(/(\d{3})(\d)/, '$1.$2')
         .replace(/(\d{3})(\d)/, '$1.$2')
@@ -133,7 +127,6 @@ const PersonForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Salvar pessoa (criar ou atualizar)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -154,7 +147,7 @@ const PersonForm = () => {
         birthDate: formData.birthDate,
         birthPlace: formData.birthPlace || null,
         nationality: formData.nationality || null,
-        cpf: formData.cpf.replace(/\D/g, ''), // Remove formatação
+        cpf: formData.cpf.replace(/\D/g, ''),
         address: formData.address || null
       };
 
