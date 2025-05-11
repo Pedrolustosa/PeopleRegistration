@@ -13,7 +13,6 @@ api.interceptors.request.use((config) => {
         const tokenObj = JSON.parse(token);
         if (tokenObj.jwt) {
           token = tokenObj.jwt;
-          console.log('JWT extraído do objeto:', token);
         }
       }
 
@@ -21,9 +20,7 @@ api.interceptors.request.use((config) => {
         token = `Bearer ${token}`;
       }
       config.headers.Authorization = token;
-      console.log('Token enviado no formato correto:', config.headers.Authorization);
     } catch (err) {
-      console.error('Erro ao processar o token:', err);
     }
   }
   
