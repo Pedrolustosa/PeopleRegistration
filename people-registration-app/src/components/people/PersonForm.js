@@ -53,6 +53,7 @@ const PersonForm = () => {
         if (person) {
           const birthDate = person.birthDate ? new Date(person.birthDate).toISOString().split('T')[0] : '';
           
+          const formattedCpf = person.cpf ? person.cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4') : '';
           setFormData({
             name: person.name || '',
             gender: person.gender !== null ? person.gender.toString() : '',
@@ -60,7 +61,7 @@ const PersonForm = () => {
             birthDate,
             birthPlace: person.birthPlace || '',
             nationality: person.nationality || '',
-            cpf: person.cpf || '',
+            cpf: formattedCpf,
             address: person.address || ''
           });
         } else {
