@@ -1,0 +1,68 @@
+/* Estilos para o layout principal com sidebar */
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  overflow-x: hidden;
+}
+
+.sidebar.expanded {
+  width: 250px;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+/* Links de navegação */
+.sidebar .nav-link {
+  padding: 0.75rem 1rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.sidebar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.active-link {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left: 3px solid #0d6efd;
+}
+
+/* Área de conteúdo */
+.content {
+  transition: all 0.3s ease;
+}
+
+.content-shifted {
+  margin-left: 250px;
+}
+
+@media (max-width: 991px) {
+  .content-shifted {
+    margin-left: 60px;
+  }
+}
+
+/* Ajusta o tamanho do ícone na sidebar */
+.sidebar .fa-icon {
+  width: 24px;
+  text-align: center;
+}
+
+/* Responsividade para dispositivos pequenos */
+@media (max-width: 576px) {
+  .sidebar.expanded {
+    width: 100%;
+  }
+  
+  .content-shifted {
+    margin-left: 0;
+  }
+}
