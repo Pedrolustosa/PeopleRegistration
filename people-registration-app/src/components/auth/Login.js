@@ -87,7 +87,7 @@ const Login = () => {
                   required
                   placeholder="Digite seu email"
                   className="border-start-0"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  pattern="^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
                 />
                 <Form.Control.Feedback type="invalid">
                   Por favor, insira um email válido.
