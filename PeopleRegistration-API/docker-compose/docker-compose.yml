@@ -1,0 +1,9 @@
+services:
+  people-registration-api:
+    build:
+      context: ..
+      dockerfile: PeopleRegistration.API/Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_URLS=http://+:8080

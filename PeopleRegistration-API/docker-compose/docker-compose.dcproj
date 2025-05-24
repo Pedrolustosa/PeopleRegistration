@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.Docker.Sdk">
+  <PropertyGroup>
+    <DockerTargetOS>Linux</DockerTargetOS>
+    <ProjectGuid>{D5D29482-B4F0-4A7B-A1C2-B0DA6B12EC3E}</ProjectGuid>
+  </PropertyGroup>
+</Project>
